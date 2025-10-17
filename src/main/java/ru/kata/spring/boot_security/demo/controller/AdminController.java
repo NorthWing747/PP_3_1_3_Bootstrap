@@ -1,5 +1,6 @@
 package ru.kata.spring.boot_security.demo.controller;
 
+import ru.kata.spring.boot_security.demo.entity.Role;
 import ru.kata.spring.boot_security.demo.entity.User;
 import ru.kata.spring.boot_security.demo.service.RoleService;
 import ru.kata.spring.boot_security.demo.service.UserService;
@@ -29,10 +30,11 @@ public class AdminController {
         // Получаем текущего аутентифицированного пользователя
         String username = principal.getName();
         User authUser = userService.findByUsername(username);
+        List<Role> allRoles = roleService.getAllRoles();
 
         model.addAttribute("authUser", authUser);
         model.addAttribute("users", userService.getAll());
-
+        model.addAttribute("allRoles", allRoles);
         return "admin";
     }
 
